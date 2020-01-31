@@ -1,0 +1,49 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29721.120
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAuthApp.Registration", "DbAuthApp.Registration\DbAuthApp.Registration.csproj", "{DF5973C9-373F-4C82-B855-E33E26C817A7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAuthApp.Passwords", "DbAuthApp.Passwords\DbAuthApp.Passwords.csproj", "{456D9686-AB97-4318-8D45-5CD6E187EC3D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAuthApp.Passwords.Tests", "DbAuthApp.Passwords.Tests\DbAuthApp.Passwords.Tests.csproj", "{39243C81-2B92-4F2E-85B2-1084AC6BD1E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAuthApp.Login", "DbAuthApp.Login\DbAuthApp.Login.csproj", "{8FAF7E12-A63A-4507-B04D-866BF744739D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAuthApp.Login.Tests", "DbAuthApp.Login.Tests\DbAuthApp.Login.Tests.csproj", "{212C6A7B-1B5C-4FB7-BFE7-DDFBC86F67A4}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{DF5973C9-373F-4C82-B855-E33E26C817A7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF5973C9-373F-4C82-B855-E33E26C817A7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF5973C9-373F-4C82-B855-E33E26C817A7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF5973C9-373F-4C82-B855-E33E26C817A7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{456D9686-AB97-4318-8D45-5CD6E187EC3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{456D9686-AB97-4318-8D45-5CD6E187EC3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{456D9686-AB97-4318-8D45-5CD6E187EC3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{456D9686-AB97-4318-8D45-5CD6E187EC3D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{39243C81-2B92-4F2E-85B2-1084AC6BD1E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{39243C81-2B92-4F2E-85B2-1084AC6BD1E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{39243C81-2B92-4F2E-85B2-1084AC6BD1E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{39243C81-2B92-4F2E-85B2-1084AC6BD1E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8FAF7E12-A63A-4507-B04D-866BF744739D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8FAF7E12-A63A-4507-B04D-866BF744739D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8FAF7E12-A63A-4507-B04D-866BF744739D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8FAF7E12-A63A-4507-B04D-866BF744739D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{212C6A7B-1B5C-4FB7-BFE7-DDFBC86F67A4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{212C6A7B-1B5C-4FB7-BFE7-DDFBC86F67A4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{212C6A7B-1B5C-4FB7-BFE7-DDFBC86F67A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{212C6A7B-1B5C-4FB7-BFE7-DDFBC86F67A4}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {74D8DBC7-8965-49CA-8E07-76FE4380091C}
+	EndGlobalSection
+EndGlobal
