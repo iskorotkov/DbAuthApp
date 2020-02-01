@@ -8,8 +8,8 @@ namespace DbAuthApp.Passwords.Tests
         public void UnequalInputKnownSalt()
         {
             var hasher = new PasswordHasher();
-            var s1 = hasher.Hash("test", "xyz");
-            var s2 = hasher.Hash("test_test", "xyz");
+            var s1 = hasher.Hash("test", new byte[] {1, 2, 3});
+            var s2 = hasher.Hash("test_test", new byte[] {1, 2, 4});
             Assert.AreNotEqual(s1, s2);
         }
 
@@ -17,8 +17,8 @@ namespace DbAuthApp.Passwords.Tests
         public void EqualInputKnownSalt()
         {
             var hasher = new PasswordHasher();
-            var s1 = hasher.Hash("abc", "xyz");
-            var s2 = hasher.Hash("abc", "xyz");
+            var s1 = hasher.Hash("abc", new byte[] {1, 2, 3});
+            var s2 = hasher.Hash("abc", new byte[] {1, 2, 3});
             Assert.AreEqual(s1, s2);
         }
     }

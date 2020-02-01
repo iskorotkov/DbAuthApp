@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 
 namespace DbAuthApp.Passwords
 {
@@ -13,9 +12,11 @@ namespace DbAuthApp.Passwords
             _length = length;
         }
 
-        public string Next() =>
-            new string(Enumerable.Repeat(0, _length)
-                .Select(_ => (char)_random.Next(1, 256))
-                .ToArray());
+        public byte[] Next()
+        {
+            var bytes = new byte[_length];
+            _random.NextBytes(bytes);
+            return bytes;
+        }
     }
 }

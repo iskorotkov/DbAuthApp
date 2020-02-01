@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using DbAuthApp.Login;
 using DbAuthApp.Passwords;
@@ -85,8 +86,8 @@ namespace DbAuthApp.Registration
             return _loginProcessor.RemoveWhitespaces(LoginBox.Text);
         }
 
-        private NpgsqlCommand BuildAddCommand(NpgsqlConnection connection, string login, string password,
-            string salt)
+        private NpgsqlCommand BuildAddCommand(NpgsqlConnection connection, string login, IEnumerable<byte> password,
+            IEnumerable<byte> salt)
         {
             var command = new NpgsqlCommand
             {
