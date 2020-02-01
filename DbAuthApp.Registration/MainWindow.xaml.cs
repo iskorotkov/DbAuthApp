@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Windows;
+﻿using System.Windows;
 using DbAuthApp.Login;
 using DbAuthApp.Passwords;
 using Npgsql;
@@ -13,7 +12,6 @@ namespace DbAuthApp.Registration
     {
         private readonly PasswordHasher _hasher = new PasswordHasher();
         private readonly SaltGenerator _saltGenerator = new SaltGenerator();
-        private NpgsqlConnection _connection;
         private readonly LoginProcessor _loginProcessor = new LoginProcessor();
         private readonly LoginChecker _loginChecker = new LoginChecker();
         private readonly PasswordChecker _passwordChecker = new PasswordChecker();
@@ -24,13 +22,6 @@ namespace DbAuthApp.Registration
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e) => SignUpUser();
-
-        private void OpenConnection()
-        {
-            // TODO: Open connection
-            var connectionString = BuildConnectionString();
-            _connection = new NpgsqlConnection(connectionString);
-        }
 
         private static string BuildConnectionString() =>
             new NpgsqlConnectionStringBuilder
@@ -59,23 +50,24 @@ namespace DbAuthApp.Registration
                 return;
             }
 
-            if (_connection.State == ConnectionState.Closed)
+            var connectionString = BuildConnectionString();
+            // ReSharper disable once ConvertToUsingDeclaration
+            using (var connection = new NpgsqlConnection(connectionString))
             {
-                OpenConnection();
+                var command = BuildAddCommand(connection, login, password, salt);
+                command.ExecuteNonQuery();
             }
-
-            var command = BuildAddCommand(login, password, salt);
-            command.ExecuteNonQuery();
         }
 
-        private NpgsqlCommand BuildAddCommand(string username, string password, string salt)
+        private NpgsqlCommand BuildAddCommand(NpgsqlConnection connection, string username, string password,
+            string salt)
         {
             var command = new NpgsqlCommand
             {
                 CommandText = @"
 INSERT INTO users(username, password, salt, creation_date)
 VALUES (@username, @password, @salt, current_timestamp)",
-                Connection = _connection
+                Connection = connection
             };
 
             command.Parameters.AddWithValue("@username", username);
