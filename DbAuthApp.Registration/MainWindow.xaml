@@ -48,10 +48,10 @@
     </Window.Resources>
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <GroupBox x:Name="UsernameGb" Header="Login">
-            <TextBox x:Name="LoginBox" TextWrapping="Wrap" Width="149.8" Margin="4,0,4,0" HorizontalAlignment="Left" TextChanged="LoginBox_TextChanged" BorderThickness="2,2,2,2" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}"/>
+            <TextBox x:Name="LoginBox" TextWrapping="Wrap" Width="149.8" Margin="4,0,4,0" HorizontalAlignment="Left" TextChanged="LoginBox_TextChanged" BorderThickness="2,2,2,2"/>
         </GroupBox>
         <GroupBox x:Name="PasswordGb" Header="Password">
-            <PasswordBox x:Name="PasswordBox" Margin="4,0,4,0" Width="149.8" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderThickness="2,2,2,2" PasswordChanged="PasswordBox_PasswordChanged"/>
+            <PasswordBox x:Name="PasswordBox" Margin="4,0,4,0" Width="149.8" BorderThickness="2,2,2,2" PasswordChanged="PasswordBox_PasswordChanged"/>
         </GroupBox>
         <Button x:Name="SignUpButton" Content="Sign Up" HorizontalAlignment="Center" Click="SignUpButton_Click" Margin="8,8,8,7"/>
     </StackPanel>
