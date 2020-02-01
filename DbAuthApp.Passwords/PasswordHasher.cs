@@ -7,7 +7,8 @@ namespace DbAuthApp.Passwords
 {
     public class PasswordHasher
     {
-        private readonly Sha3Digest _hashAlgorithm = new Sha3Digest(512);
+        private const int BitLength = 512;
+        private readonly Sha3Digest _hashAlgorithm = new Sha3Digest(BitLength);
 
         public byte[] Hash(string password, IEnumerable<byte> salt)
         {
@@ -15,7 +16,7 @@ namespace DbAuthApp.Passwords
             bytes.AddRange(salt);
             
             _hashAlgorithm.BlockUpdate(bytes.ToArray(), 0, bytes.Count);
-            var result = new byte[64]; // 512 : 8
+            var result = new byte[BitLength / 8];
             _hashAlgorithm.DoFinal(result, 0);
 
             return result;
