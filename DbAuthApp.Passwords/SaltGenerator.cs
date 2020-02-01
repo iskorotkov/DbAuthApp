@@ -15,7 +15,7 @@ namespace DbAuthApp.Passwords
 
         public string Next() =>
             new string(Enumerable.Repeat(0, _length)
-                .Select(_ => (char)_random.Next(256))
+                .Select(_ => (char)_random.Next(1, 256))
                 .ToArray());
     }
 }
