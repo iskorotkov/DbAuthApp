@@ -71,9 +71,8 @@ namespace DbAuthApp.Registration
             var salt = _saltGenerator.Next();
             var password = _hasher.Hash(RetrievePassword(), salt);
 
-            var connectionString = BuildConnectionString();
             // ReSharper disable once ConvertToUsingDeclaration
-            using (var connection = new NpgsqlConnection(connectionString))
+            using (var connection = new NpgsqlConnection(BuildConnectionString()))
             {
                 connection.Open();
                 var command = BuildAddCommand(connection, login, password, salt);
@@ -127,10 +126,25 @@ WHERE users.login = @login",
                 return;
             }
 
-            IsLoginCorrect = _loginChecker.IsCorrect(RetrieveLogin());
+            var login = RetrieveLogin();
+            IsLoginCorrect = _loginChecker.IsCorrect(login);
             if (IsLoginCorrect)
             {
-                _loginDecorator.InputIsCorrect();
+                // ReSharper disable once ConvertToUsingDeclaration
+                using (var connection = new NpgsqlConnection(BuildConnectionString()))
+                {
+                    connection.Open();
+                    var loginsPresent = (long)BuildCountLoginCommand(connection, login).ExecuteScalar();
+                    IsLoginCorrect = loginsPresent == 0;
+                    if (IsLoginCorrect)
+                    {
+                        _loginDecorator.InputIsCorrect();
+                    }
+                    else
+                    {
+                        _loginDecorator.InputIsIncorrect("There is another user with the same login");
+                    }
+                }
             }
             else
             {
