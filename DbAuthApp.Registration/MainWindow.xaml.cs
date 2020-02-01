@@ -75,6 +75,7 @@ namespace DbAuthApp.Registration
             // ReSharper disable once ConvertToUsingDeclaration
             using (var connection = new NpgsqlConnection(connectionString))
             {
+                connection.Open();
                 var command = BuildAddCommand(connection, login, password, salt);
                 command.ExecuteNonQuery();
             }
@@ -85,21 +86,35 @@ namespace DbAuthApp.Registration
             return _loginProcessor.RemoveWhitespaces(LoginBox.Text);
         }
 
-        private NpgsqlCommand BuildAddCommand(NpgsqlConnection connection, string username, string password,
+        private NpgsqlCommand BuildAddCommand(NpgsqlConnection connection, string login, string password,
             string salt)
         {
             var command = new NpgsqlCommand
             {
                 CommandText = @"
-INSERT INTO users(username, password, salt, creation_date)
-VALUES (@username, @password, @salt, current_timestamp)",
-                Connection = connection
+INSERT INTO users(login, password, salt, creation_date)
+VALUES (@login, @password, @salt, current_timestamp)",
+                Connection = connection,
             };
 
-            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@login", login);
             command.Parameters.AddWithValue("@password", password);
             command.Parameters.AddWithValue("@salt", salt);
+            return command;
+        }
 
+        private NpgsqlCommand BuildCountLoginCommand(NpgsqlConnection connection, string login)
+        {
+            var command = new NpgsqlCommand
+            {
+                Connection = connection,
+                CommandText = @"
+SELECT COUNT(*)
+FROM users
+WHERE users.login = @login",
+            };
+
+            command.Parameters.AddWithValue("@login", login);
             return command;
         }
 
