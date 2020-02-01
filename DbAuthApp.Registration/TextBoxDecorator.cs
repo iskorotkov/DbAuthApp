@@ -5,11 +5,11 @@ namespace DbAuthApp.Registration
 {
     public class TextBoxDecorator
     {
-        private readonly TextBox _textBox;
+        private readonly Control _textBox;
         private readonly Brush _defaultBorderBrush;
         private readonly string _defaultTooltip;
 
-        public TextBoxDecorator(TextBox textBox)
+        public TextBoxDecorator(Control textBox)
         {
             _textBox = textBox;
             _defaultBorderBrush = textBox.BorderBrush;
