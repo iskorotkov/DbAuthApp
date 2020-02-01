@@ -6,12 +6,33 @@
         xmlns:local="clr-namespace:DbAuthApp.Registration"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800" MinHeight="200" MinWidth="200">
+    <Window.Resources>
+        <Style TargetType="TextBox">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TextBox}">
+                        <Border x:Name="border" BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                            <ScrollViewer x:Name="PART_ContentHost" Focusable="false"
+                                          HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Hidden" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsEnabled" Value="false">
+                                <Setter Property="Opacity" TargetName="border" Value="0.56" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <GroupBox x:Name="UsernameGb" Header="Username">
-            <TextBox x:Name="LoginBox" TextWrapping="Wrap" ToolTip="" Width="149.8" Margin="4,0,4,0" HorizontalAlignment="Left"/>
+            <TextBox x:Name="LoginBox" TextWrapping="Wrap" Width="149.8" Margin="4,0,4,0" HorizontalAlignment="Left" TextChanged="LoginBox_TextChanged" BorderThickness="2,2,2,2" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}"/>
         </GroupBox>
         <GroupBox x:Name="PasswordGb" Header="Password">
-            <PasswordBox x:Name="PasswordBox" ToolTip="" Margin="4,0,4.2,0" Width="149.8"/>
+            <PasswordBox x:Name="PasswordBox" Margin="4,0,4.2,0" Width="149.8" SelectionBrush="{x:Null}" SelectionTextBrush="{x:Null}" BorderThickness="2,2,2,2"/>
         </GroupBox>
         <Button x:Name="SignUpButton" Content="Sign Up" HorizontalAlignment="Center" Click="SignUpButton_Click" Margin="8,8,8,7"/>
     </StackPanel>

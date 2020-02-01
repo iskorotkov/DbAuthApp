@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System.Linq;
+using System.Windows;
 using DbAuthApp.Login;
 using DbAuthApp.Passwords;
 using Npgsql;
@@ -15,10 +16,14 @@ namespace DbAuthApp.Registration
         private readonly LoginProcessor _loginProcessor = new LoginProcessor();
         private readonly LoginChecker _loginChecker = new LoginChecker();
         private readonly PasswordChecker _passwordChecker = new PasswordChecker();
+        private readonly TextBoxDecorator _loginDecorator;
+        private readonly TextBoxDecorator _passwordDecorator;
 
         public MainWindow()
         {
             InitializeComponent();
+            _loginDecorator = new TextBoxDecorator(LoginBox);
+            _passwordDecorator = new TextBoxDecorator(PasswordBox);
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e) => SignUpUser();
@@ -75,6 +80,26 @@ VALUES (@username, @password, @salt, current_timestamp)",
             command.Parameters.AddWithValue("@salt", salt);
 
             return command;
+        }
+
+        private void LoginBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
+        {
+            if (!LoginBox.Text.Any())
+            {
+                _loginDecorator.Reset();
+                return;
+            }
+
+            var login = _loginProcessor.RemoveWhitespaces(LoginBox.Text);
+            if (_loginChecker.IsCorrect(login))
+            {
+                _loginDecorator.InputIsCorrect();
+            }
+            else
+            {
+                // TODO: Add more info about login
+                _loginDecorator.InputIsIncorrect("Login is incorrect");
+            }
         }
     }
 }
