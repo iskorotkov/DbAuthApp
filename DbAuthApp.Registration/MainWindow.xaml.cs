@@ -12,12 +12,12 @@ namespace DbAuthApp.Registration
     public partial class MainWindow
     {
         private readonly PasswordHasher _hasher = new PasswordHasher();
-        private readonly SaltGenerator _saltGenerator = new SaltGenerator();
-        private readonly LoginProcessor _loginProcessor = new LoginProcessor();
         private readonly LoginChecker _loginChecker = new LoginChecker();
-        private readonly PasswordChecker _passwordChecker = new PasswordChecker();
         private readonly TextBoxDecorator _loginDecorator;
+        private readonly LoginProcessor _loginProcessor = new LoginProcessor();
+        private readonly PasswordChecker _passwordChecker = new PasswordChecker();
         private readonly TextBoxDecorator _passwordDecorator;
+        private readonly SaltGenerator _saltGenerator = new SaltGenerator();
 
         public MainWindow()
         {
@@ -39,22 +39,10 @@ namespace DbAuthApp.Registration
 
         private void SignUpUser()
         {
-            var login = _loginProcessor.RemoveWhitespaces(LoginBox.Text);
+            var login = RetrieveLogin();
             var salt = _saltGenerator.Next();
-
-            if (!_loginChecker.IsCorrect(login))
-            {
-                // TODO: Login isn't correct
-                return;
-            }
-
-            var password = _hasher.Hash(PasswordBox.Password.Trim(), salt);
-            if (!_passwordChecker.IsStrong(password, login))
-            {
-                // TODO: Password isn't correct
-                return;
-            }
-
+            var password = _hasher.Hash(RetrievePassword(), salt);
+            
             var connectionString = BuildConnectionString();
             // ReSharper disable once ConvertToUsingDeclaration
             using (var connection = new NpgsqlConnection(connectionString))
@@ -62,6 +50,11 @@ namespace DbAuthApp.Registration
                 var command = BuildAddCommand(connection, login, password, salt);
                 command.ExecuteNonQuery();
             }
+        }
+
+        private string RetrieveLogin()
+        {
+            return _loginProcessor.RemoveWhitespaces(LoginBox.Text);
         }
 
         private NpgsqlCommand BuildAddCommand(NpgsqlConnection connection, string username, string password,
@@ -90,8 +83,7 @@ VALUES (@username, @password, @salt, current_timestamp)",
                 return;
             }
 
-            var login = _loginProcessor.RemoveWhitespaces(LoginBox.Text);
-            if (_loginChecker.IsCorrect(login))
+            if (_loginChecker.IsCorrect(RetrieveLogin()))
             {
                 _loginDecorator.InputIsCorrect();
             }
@@ -101,5 +93,26 @@ VALUES (@username, @password, @salt, current_timestamp)",
                 _loginDecorator.InputIsIncorrect("Login is incorrect");
             }
         }
+
+        private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            if (!PasswordBox.Password.Any())
+            {
+                _passwordDecorator.Reset();
+                return;
+            }
+
+            if (_passwordChecker.IsStrong(RetrievePassword(), RetrieveLogin()))
+            {
+                _passwordDecorator.InputIsCorrect();
+            }
+            else
+            {
+                // TODO: Show password strength indicator
+                _passwordDecorator.InputIsIncorrect("Your password isn't strong enough");
+            }
+        }
+
+        private string RetrievePassword() => PasswordBox.Password.Trim();
     }
 }
