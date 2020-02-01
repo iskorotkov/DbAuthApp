@@ -18,12 +18,40 @@ namespace DbAuthApp.Registration
         private readonly PasswordChecker _passwordChecker = new PasswordChecker();
         private readonly TextBoxDecorator _passwordDecorator;
         private readonly SaltGenerator _saltGenerator = new SaltGenerator();
+        private bool _isLoginCorrect;
+        private bool _isPasswordCorrect;
 
         public MainWindow()
         {
             InitializeComponent();
             _loginDecorator = new TextBoxDecorator(LoginBox);
             _passwordDecorator = new TextBoxDecorator(PasswordBox);
+            UpdateSignUpButtonState();
+        }
+
+        private bool IsLoginCorrect
+        {
+            get => _isLoginCorrect;
+            set
+            {
+                _isLoginCorrect = value;
+                UpdateSignUpButtonState();
+            }
+        }
+
+        private bool IsPasswordCorrect
+        {
+            get => _isPasswordCorrect;
+            set
+            {
+                _isPasswordCorrect = value;
+                UpdateSignUpButtonState();
+            }
+        }
+
+        private void UpdateSignUpButtonState()
+        {
+            SignUpButton.IsEnabled = IsLoginCorrect && IsPasswordCorrect;
         }
 
         private void SignUpButton_Click(object sender, RoutedEventArgs e) => SignUpUser();
@@ -42,7 +70,7 @@ namespace DbAuthApp.Registration
             var login = RetrieveLogin();
             var salt = _saltGenerator.Next();
             var password = _hasher.Hash(RetrievePassword(), salt);
-            
+
             var connectionString = BuildConnectionString();
             // ReSharper disable once ConvertToUsingDeclaration
             using (var connection = new NpgsqlConnection(connectionString))
@@ -79,11 +107,13 @@ VALUES (@username, @password, @salt, current_timestamp)",
         {
             if (!LoginBox.Text.Any())
             {
+                IsLoginCorrect = false;
                 _loginDecorator.Reset();
                 return;
             }
 
-            if (_loginChecker.IsCorrect(RetrieveLogin()))
+            IsLoginCorrect = _loginChecker.IsCorrect(RetrieveLogin());
+            if (IsLoginCorrect)
             {
                 _loginDecorator.InputIsCorrect();
             }
@@ -98,11 +128,13 @@ VALUES (@username, @password, @salt, current_timestamp)",
         {
             if (!PasswordBox.Password.Any())
             {
+                IsPasswordCorrect = false;
                 _passwordDecorator.Reset();
                 return;
             }
 
-            if (_passwordChecker.IsStrong(RetrievePassword(), RetrieveLogin()))
+            IsPasswordCorrect = _passwordChecker.IsStrong(RetrievePassword(), RetrieveLogin());
+            if (IsPasswordCorrect)
             {
                 _passwordDecorator.InputIsCorrect();
             }
