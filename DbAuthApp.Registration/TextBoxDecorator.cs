@@ -5,15 +5,17 @@ namespace DbAuthApp.Registration
 {
     public class TextBoxDecorator
     {
-        private TextBox _textBox;
-        private Brush _defaultBorderBrush;
-        
+        private readonly TextBox _textBox;
+        private readonly Brush _defaultBorderBrush;
+        private readonly string _defaultTooltip;
+
         public TextBoxDecorator(TextBox textBox)
         {
             _textBox = textBox;
             _defaultBorderBrush = textBox.BorderBrush;
+            _defaultTooltip = (string) textBox.ToolTip;
         }
-        
+
         public void InputIsIncorrect(string message)
         {
             _textBox.BorderBrush = Brushes.Red;
@@ -23,12 +25,13 @@ namespace DbAuthApp.Registration
         public void InputIsCorrect()
         {
             _textBox.BorderBrush = Brushes.Green;
-            _textBox.ToolTip = "";
+            _textBox.ToolTip = _defaultTooltip;
         }
 
         public void Reset()
         {
             _textBox.BorderBrush = _defaultBorderBrush;
+            _textBox.ToolTip = _defaultTooltip;
         }
     }
 }
