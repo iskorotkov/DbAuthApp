@@ -4,11 +4,8 @@ namespace DbAuthApp.Login
 {
     public class LoginChecker
     {
-        private const string LoginPattern = @"^[а-яА-Яa-zA-Z0-9\s]+$";
+        private const string LoginPattern = @"^[a-zA-Zа-яА-Я0-9ё`!@#$%^&*()_+|\-=\\{}\[\]:"";'<>?,./№~]+$";
 
-        public bool IsCorrect(string login)
-        {
-            return Regex.IsMatch(login, LoginPattern);
-        }
+        public bool IsCorrect(string login) => Regex.IsMatch(login, LoginPattern);
     }
 }

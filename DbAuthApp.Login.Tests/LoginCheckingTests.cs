@@ -4,14 +4,17 @@ namespace DbAuthApp.Login.Tests
 {
     public class LoginCheckingTests
     {
-        [Test]
-        public void CorrectLoginsWithoutWhitespaces()
+        [TestCase("username")]
+        [TestCase("имяпользователя")]
+        [TestCase("123имя7890")]
+        [TestCase("12345678")]
+        [TestCase(@"!@#$%^^&*()_+№;:?/|\/*-")]
+        [TestCase("`~ёqй")]
+        [TestCase("<>./,")]
+        public void CorrectLoginsWithoutWhitespaces(string login)
         {
             var util = new LoginChecker();
-            Assert.IsTrue(util.IsCorrect("username"));
-            Assert.IsTrue(util.IsCorrect("имяпользователя"));
-            Assert.IsTrue(util.IsCorrect("123имя7890"));
-            Assert.IsTrue(util.IsCorrect("12345678"));
+            Assert.IsTrue(util.IsCorrect(login));
         }
 
         [Test]
@@ -35,14 +38,13 @@ namespace DbAuthApp.Login.Tests
             Assert.IsTrue(util.IsCorrect("   user\tname\r\n"));
         }
 
-        [Test]
-        public void IncorrectLogins()
+        [TestCase("\x00")]
+        [TestCase("\u2200@username")]
+        [TestCase("user\u0460_name")]
+        public void IncorrectLogins(string login)
         {
             var util = new LoginChecker();
-            Assert.IsFalse(util.IsCorrect("//"));
-            Assert.IsFalse(util.IsCorrect("@username"));
-            Assert.IsFalse(util.IsCorrect("user_name"));
-            Assert.IsFalse(util.IsCorrect("~username"));
+            Assert.IsFalse(util.IsCorrect(login));
         }
     }
 }
