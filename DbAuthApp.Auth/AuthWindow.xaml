@@ -45,14 +45,16 @@
             </Setter>
         </Style>
     </Window.Resources>
-    <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-        <GroupBox x:Name="UsernameGb" Header="Login">
-            <TextBox x:Name="LoginBox" TextWrapping="Wrap" Margin="4,0,4,0" HorizontalAlignment="Stretch" BorderThickness="2,2,2,2" AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True" TextChanged="LoginBox_TextChanged"/>
-        </GroupBox>
-        <GroupBox x:Name="PasswordGb" Header="Password">
-            <PasswordBox x:Name="PasswordBox" Margin="4,0,4,0" BorderThickness="2,2,2,2" PasswordChanged="PasswordBox_PasswordChanged"/>
-        </GroupBox>
-        <CheckBox x:Name="ClearAfterAuthCb" Content="Clear form after authentication" Margin="8,8,8,8" IsChecked="True"/>
-        <Button x:Name="AuthButton" Content="Authenticate" HorizontalAlignment="Center" Click="AuthButton_Click" Margin="8,8,8,8" Padding="2,2,2,2"/>
-    </StackPanel>
+    <ScrollViewer HorizontalAlignment="Stretch" VerticalAlignment="Stretch" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" VerticalScrollBarVisibility="Auto">
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <GroupBox x:Name="UsernameGb" Header="Login">
+                <TextBox x:Name="LoginBox" TextWrapping="Wrap" Margin="4,0,4,0" HorizontalAlignment="Stretch" BorderThickness="2,2,2,2" AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True" TextChanged="LoginBox_TextChanged"/>
+            </GroupBox>
+            <GroupBox x:Name="PasswordGb" Header="Password">
+                <PasswordBox x:Name="PasswordBox" Margin="4,0,4,0" BorderThickness="2,2,2,2" PasswordChanged="PasswordBox_PasswordChanged"/>
+            </GroupBox>
+            <CheckBox x:Name="ClearAfterAuthCb" Content="Clear form after authentication" Margin="8,8,8,8" IsChecked="True"/>
+            <Button x:Name="AuthButton" Content="Authenticate" HorizontalAlignment="Center" Click="AuthButton_Click" Margin="8,8,8,8" Padding="2,2,2,2"/>
+        </StackPanel>
+    </ScrollViewer>
 </Window>
