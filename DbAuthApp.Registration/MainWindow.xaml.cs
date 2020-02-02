@@ -78,39 +78,31 @@ namespace DbAuthApp.Registration
             {
                 connection.Open();
                 var command = BuildAddCommand(connection, login, password, salt);
+                string message;
+                string caption;
                 try
                 {
                     command.ExecuteNonQuery();
-                    MessageBox.Show(this, "You have successfully signed up", "Success!", MessageBoxButton.OK);
-                    if (ShouldClearFormAfterSignUp())
-                    {
-                        ClearForm();
-                        _loginDecorator.Reset();
-                    }
-                    else
-                    {
-                        _loginDecorator.InputIsIncorrect("There is another user with the same login");
-                    }
+                    message = "You have successfully signed up";
+                    caption = "Success!";
                 }
                 catch (Exception)
                 {
-                    if (ShouldClearFormAfterSignUp())
-                    {
-                        ClearForm();
-                        _loginDecorator.Reset();
-                    }
-                    else
-                    {
-                        _loginDecorator.InputIsIncorrect("Can't create user with this login");
-                    }
+                    message = "Can't create user with this login. Login violates database restrictions";
+                    caption = "Failure!";
+                }
 
-                    MessageBox.Show(this, "Can't create user with this login. Login violates database restrictions",
-                        "Failure!", MessageBoxButton.OK);
-                }
-                finally
+                MessageBox.Show(this, message, caption, MessageBoxButton.OK);
+                if (ShouldClearFormAfterSignUp())
                 {
-                    IsLoginCorrect = false;
+                    ClearForm();
                 }
+                else
+                {
+                    _loginDecorator.InputIsIncorrect("Can't create user with this login");
+                }
+
+                IsLoginCorrect = false;
             }
         }
 
