@@ -121,8 +121,7 @@ namespace DbAuthApp.Registration
             }
             else
             {
-                // TODO: Add more info about login
-                _loginDecorator.InputIsIncorrect("Login is incorrect");
+                _loginDecorator.InputIsIncorrect("Login format is incorrect. Use only characters from EN-RU keyboard");
             }
         }
 
@@ -140,7 +139,6 @@ namespace DbAuthApp.Registration
             }
             else
             {
-                // TODO: Show password strength indicator
                 _passwordDecorator.InputIsIncorrect("Your password isn't strong enough");
             }
         }
