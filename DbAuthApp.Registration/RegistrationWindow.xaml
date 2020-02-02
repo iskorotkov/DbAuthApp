@@ -47,7 +47,7 @@
     </Window.Resources>
     <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
         <GroupBox x:Name="UsernameGb" Header="Login">
-            <TextBox x:Name="LoginBox" TextWrapping="Wrap" Margin="4,0,4,0" HorizontalAlignment="Stretch" TextChanged="LoginBox_TextChanged" BorderThickness="2,2,2,2"/>
+            <TextBox x:Name="LoginBox" TextWrapping="Wrap" Margin="4,0,4,0" HorizontalAlignment="Stretch" TextChanged="LoginBox_TextChanged" BorderThickness="2,2,2,2" AcceptsReturn="True" AcceptsTab="True" AutoWordSelection="True"/>
         </GroupBox>
         <GroupBox x:Name="PasswordGb" Header="Password">
             <PasswordBox x:Name="PasswordBox" Margin="4,0,4,0" BorderThickness="2,2,2,2" PasswordChanged="PasswordBox_PasswordChanged"/>
