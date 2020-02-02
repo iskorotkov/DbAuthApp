@@ -24,7 +24,10 @@ namespace DbAuthApp.Registration
         {
             InitializeComponent();
             _loginDecorator = new TextBoxDecorator(LoginBox);
+            _loginDecorator.OnIsCorrectChanged += UpdateSignUpButtonState;
+
             _passwordDecorator = new TextBoxDecorator(PasswordBox);
+            _passwordDecorator.OnIsCorrectChanged += UpdateSignUpButtonState;
             UpdateSignUpButtonState();
         }
 
@@ -72,8 +75,6 @@ namespace DbAuthApp.Registration
             {
                 _loginDecorator.InputIsIncorrect("Can't create user with this login");
             }
-
-            UpdateSignUpButtonState();
         }
 
         private static string BuildConnectionString() =>
@@ -123,8 +124,6 @@ namespace DbAuthApp.Registration
                 // TODO: Add more info about login
                 _loginDecorator.InputIsIncorrect("Login is incorrect");
             }
-
-            UpdateSignUpButtonState();
         }
 
         private void PasswordBox_PasswordChanged(object sender, RoutedEventArgs e)
@@ -144,8 +143,6 @@ namespace DbAuthApp.Registration
                 // TODO: Show password strength indicator
                 _passwordDecorator.InputIsIncorrect("Your password isn't strong enough");
             }
-
-            UpdateSignUpButtonState();
         }
 
         private string RetrievePassword() => PasswordBox.Password.Trim();

@@ -5,9 +5,14 @@ namespace DbAuthApp.Registration
 {
     public class TextBoxDecorator
     {
+        public delegate void OnIsCorrectChangedDelegate();
+
         private readonly Brush _defaultBorderBrush;
         private readonly string _defaultTooltip;
         private readonly Control _textBox;
+        private bool _isCorrect;
+
+        public OnIsCorrectChangedDelegate OnIsCorrectChanged;
 
         public TextBoxDecorator(Control textBox)
         {
@@ -16,7 +21,15 @@ namespace DbAuthApp.Registration
             _defaultTooltip = (string) textBox.ToolTip;
         }
 
-        public bool IsCorrect { get; private set; }
+        public bool IsCorrect
+        {
+            get => _isCorrect;
+            private set
+            {
+                _isCorrect = value;
+                OnIsCorrectChanged.Invoke();
+            }
+        }
 
         public void InputIsIncorrect(string message)
         {
