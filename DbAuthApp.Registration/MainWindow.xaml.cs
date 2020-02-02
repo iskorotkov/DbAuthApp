@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using DbAuthApp.Login;
@@ -77,7 +78,22 @@ namespace DbAuthApp.Registration
             {
                 connection.Open();
                 var command = BuildAddCommand(connection, login, password, salt);
-                command.ExecuteNonQuery();
+                try
+                {
+                    command.ExecuteNonQuery();
+                    _loginDecorator.InputIsIncorrect("There is another user with the same login");
+                    MessageBox.Show(this, "You have successfully signed up", "Success!", MessageBoxButton.OK);
+                }
+                catch (Exception)
+                {
+                    _loginDecorator.InputIsIncorrect("Can't create user with this login");
+                    MessageBox.Show(this, "Can't create user with this login. Login violates database restrictions",
+                        "Failure!", MessageBoxButton.OK);
+                }
+                finally
+                {
+                    IsLoginCorrect = false;
+                }
             }
         }
 
@@ -135,7 +151,7 @@ WHERE users.login = @login",
                 using (var connection = new NpgsqlConnection(BuildConnectionString()))
                 {
                     connection.Open();
-                    var loginsPresent = (long)BuildCountLoginCommand(connection, login).ExecuteScalar();
+                    var loginsPresent = (long) BuildCountLoginCommand(connection, login).ExecuteScalar();
                     IsLoginCorrect = loginsPresent == 0;
                     if (IsLoginCorrect)
                     {
