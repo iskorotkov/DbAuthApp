@@ -4,30 +4,28 @@ namespace DbAuthApp.Login.Tests
 {
     public class LoginProcessingTests
     {
-        [Test]
-        public void NoChangeLogin()
+        [TestCase("username", "username")]
+        [TestCase("username123456", "username123456")]
+        [TestCase("user name", "user name")]
+        [TestCase("user name 20 20", "user name 20 20")]
+
+        public void NoChangeLogin(string expected, string login)
         {
-            var proc = new LoginProcessor();
-            Assert.AreEqual("username", proc.RemoveWhitespaces("username"));
-            Assert.AreEqual("username123456", proc.RemoveWhitespaces("username123456"));
-            Assert.AreEqual("user name", proc.RemoveWhitespaces("user name"));
-            Assert.AreEqual("user name 20 20", proc.RemoveWhitespaces("user name 20 20"));
+            Assert.AreEqual(expected, new LoginProcessor().RemoveWhitespaces(login));
         }
 
-        [Test]
-        public void TrimSpaces()
+        [TestCase("user name", "\t\nuser name    ")]
+        public void TrimSpaces(string expected, string login)
         {
-            var proc = new LoginProcessor();
-            Assert.AreEqual("user name", proc.RemoveWhitespaces("\t\nuser name    "));
+            Assert.AreEqual(expected, new LoginProcessor().RemoveWhitespaces(login));
         }
 
-        [Test]
-        public void ReplaceWithSingleSpace()
+        [TestCase("user name", "user  name")]
+        [TestCase("user name", "user\tname")]
+        [TestCase("user name", "user\r\nname\n\n")]
+        public void ReplaceWithSingleSpace(string expected, string login)
         {
-            var proc = new LoginProcessor();
-            Assert.AreEqual("user name", proc.RemoveWhitespaces("user  name"));
-            Assert.AreEqual("user name", proc.RemoveWhitespaces("user\tname"));
-            Assert.AreEqual("user name", proc.RemoveWhitespaces("user\r\nname\n\n"));
+            Assert.AreEqual(expected, new LoginProcessor().RemoveWhitespaces(login));
         }
     }
 }

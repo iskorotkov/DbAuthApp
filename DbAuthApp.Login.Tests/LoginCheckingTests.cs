@@ -13,29 +13,26 @@ namespace DbAuthApp.Login.Tests
         [TestCase("<>./,")]
         public void CorrectLoginsWithoutWhitespaces(string login)
         {
-            var util = new LoginChecker();
-            Assert.IsTrue(util.IsCorrect(login));
+            Assert.IsTrue(new LoginChecker().IsCorrect(login));
         }
 
-        [Test]
-        public void CorrectLoginsWithSpaces()
+        [TestCase("user name")]
+        [TestCase("    user name")]
+        [TestCase("  user name    ")]
+        [TestCase("user    name")]
+        public void CorrectLoginsWithSpaces(string login)
         {
-            var util = new LoginChecker();
-            Assert.IsTrue(util.IsCorrect("user name"));
-            Assert.IsTrue(util.IsCorrect("    user name"));
-            Assert.IsTrue(util.IsCorrect("  user name    "));
-            Assert.IsTrue(util.IsCorrect("user    name"));
+            Assert.IsFalse(new LoginChecker().IsCorrect(login));
         }
 
-        [Test]
-        public void CorrectLoginsWithAllWhitespaces()
+        [TestCase("user\t\t\tname")]
+        [TestCase("user\rname")]
+        [TestCase("user\nname")]
+        [TestCase("user\r\nname")]
+        [TestCase("   user\tname\r\n")]
+        public void CorrectLoginsWithAllWhitespaces(string login)
         {
-            var util = new LoginChecker();
-            Assert.IsTrue(util.IsCorrect("user\t\t\tname"));
-            Assert.IsTrue(util.IsCorrect("user\rname"));
-            Assert.IsTrue(util.IsCorrect("user\nname"));
-            Assert.IsTrue(util.IsCorrect("user\r\nname"));
-            Assert.IsTrue(util.IsCorrect("   user\tname\r\n"));
+            Assert.IsFalse(new LoginChecker().IsCorrect(login));
         }
 
         [TestCase("\x00")]
@@ -43,8 +40,7 @@ namespace DbAuthApp.Login.Tests
         [TestCase("user\u0460_name")]
         public void IncorrectLogins(string login)
         {
-            var util = new LoginChecker();
-            Assert.IsFalse(util.IsCorrect(login));
+            Assert.IsFalse(new LoginChecker().IsCorrect(login));
         }
     }
 }
