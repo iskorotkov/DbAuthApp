@@ -90,7 +90,7 @@ namespace DbAuthApp.Registration
         }
 
         private bool ShouldClearFormAfterSignUp() =>
-            ClearAfterSignUpCB.IsChecked != null && (bool) ClearAfterSignUpCB.IsChecked;
+            ClearAfterSignUpCb.IsChecked != null && (bool) ClearAfterSignUpCb.IsChecked;
 
         private string RetrieveLogin() => _loginProcessor.RemoveWhitespaces(LoginBox.Text);
 

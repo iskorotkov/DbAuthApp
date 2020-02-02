@@ -3,7 +3,6 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:DbAuthApp.Registration"
         mc:Ignorable="d"
         Title="Registration" Height="450" Width="800" MinHeight="250" MinWidth="250">
     <Window.Resources>
@@ -53,7 +52,7 @@
         <GroupBox x:Name="PasswordGb" Header="Password">
             <PasswordBox x:Name="PasswordBox" Margin="4,0,4,0" BorderThickness="2,2,2,2" PasswordChanged="PasswordBox_PasswordChanged"/>
         </GroupBox>
-        <CheckBox x:Name="ClearAfterSignUpCB" Content="Clear form after sign up" Margin="8,8,8,8" IsChecked="True"/>
+        <CheckBox x:Name="ClearAfterSignUpCb" Content="Clear form after sign up" Margin="8,8,8,8" IsChecked="True"/>
         <Button x:Name="SignUpButton" Content="Sign Up" HorizontalAlignment="Center" Click="SignUpButton_Click" Margin="8,8,8,8" Padding="2,2,4,2"/>
     </StackPanel>
 </Window>
