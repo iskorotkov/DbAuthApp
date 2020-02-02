@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using DbAuthApp.Login;
@@ -77,12 +76,12 @@ namespace DbAuthApp.Registration
             using (var connection = new NpgsqlConnection(BuildConnectionString()))
             {
                 connection.Open();
-                var command = BuildAddCommand(connection, login, password, salt);
+                var command = new AddUserCommand(connection, login, password, salt);
                 string message;
                 string caption;
                 try
                 {
-                    command.ExecuteNonQuery();
+                    command.Execute();
                     message = "You have successfully signed up";
                     caption = "Success!";
                 }
@@ -122,38 +121,6 @@ namespace DbAuthApp.Registration
             return _loginProcessor.RemoveWhitespaces(LoginBox.Text);
         }
 
-        private NpgsqlCommand BuildAddCommand(NpgsqlConnection connection, string login, IEnumerable<byte> password,
-            IEnumerable<byte> salt)
-        {
-            var command = new NpgsqlCommand
-            {
-                CommandText = @"
-INSERT INTO users(login, password, salt, creation_date)
-VALUES (@login, @password, @salt, current_timestamp)",
-                Connection = connection,
-            };
-
-            command.Parameters.AddWithValue("@login", login);
-            command.Parameters.AddWithValue("@password", password);
-            command.Parameters.AddWithValue("@salt", salt);
-            return command;
-        }
-
-        private NpgsqlCommand BuildCountLoginCommand(NpgsqlConnection connection, string login)
-        {
-            var command = new NpgsqlCommand
-            {
-                Connection = connection,
-                CommandText = @"
-SELECT COUNT(*)
-FROM users
-WHERE users.login = @login",
-            };
-
-            command.Parameters.AddWithValue("@login", login);
-            return command;
-        }
-
         private void LoginBox_TextChanged(object sender, System.Windows.Controls.TextChangedEventArgs e)
         {
             if (!LoginBox.Text.Any())
@@ -171,7 +138,7 @@ WHERE users.login = @login",
                 using (var connection = new NpgsqlConnection(BuildConnectionString()))
                 {
                     connection.Open();
-                    var loginsPresent = (long) BuildCountLoginCommand(connection, login).ExecuteScalar();
+                    var loginsPresent = new CountLoginCommand(connection, login).Execute();
                     IsLoginCorrect = loginsPresent == 0;
                     if (IsLoginCorrect)
                     {
