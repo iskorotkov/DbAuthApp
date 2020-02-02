@@ -13,7 +13,7 @@ namespace DbAuthApp.Registration
             _command = new NpgsqlCommand
             {
                 CommandText = @"INSERT INTO users(login, password, salt, creation_date)
-                                VALUES (@login, @password, @salt, current_timestamp)",
+                                VALUES (@login, @password, @salt, current_date)",
                 Connection = connection,
             };
 
