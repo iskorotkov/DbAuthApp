@@ -81,12 +81,29 @@ namespace DbAuthApp.Registration
                 try
                 {
                     command.ExecuteNonQuery();
-                    _loginDecorator.InputIsIncorrect("There is another user with the same login");
                     MessageBox.Show(this, "You have successfully signed up", "Success!", MessageBoxButton.OK);
+                    if (ShouldClearFormAfterSignUp())
+                    {
+                        ClearForm();
+                        _loginDecorator.Reset();
+                    }
+                    else
+                    {
+                        _loginDecorator.InputIsIncorrect("There is another user with the same login");
+                    }
                 }
                 catch (Exception)
                 {
-                    _loginDecorator.InputIsIncorrect("Can't create user with this login");
+                    if (ShouldClearFormAfterSignUp())
+                    {
+                        ClearForm();
+                        _loginDecorator.Reset();
+                    }
+                    else
+                    {
+                        _loginDecorator.InputIsIncorrect("Can't create user with this login");
+                    }
+
                     MessageBox.Show(this, "Can't create user with this login. Login violates database restrictions",
                         "Failure!", MessageBoxButton.OK);
                 }
@@ -95,6 +112,17 @@ namespace DbAuthApp.Registration
                     IsLoginCorrect = false;
                 }
             }
+        }
+
+        private void ClearForm()
+        {
+            LoginBox.Text = string.Empty;
+            PasswordBox.Password = string.Empty;
+        }
+
+        private bool ShouldClearFormAfterSignUp()
+        {
+            return ClearAfterSignUpCB.IsChecked != null && (bool) ClearAfterSignUpCB.IsChecked;
         }
 
         private string RetrieveLogin()

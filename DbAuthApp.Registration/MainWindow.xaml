@@ -53,6 +53,7 @@
         <GroupBox x:Name="PasswordGb" Header="Password">
             <PasswordBox x:Name="PasswordBox" Margin="4,0,4,0" Width="149.8" BorderThickness="2,2,2,2" PasswordChanged="PasswordBox_PasswordChanged"/>
         </GroupBox>
-        <Button x:Name="SignUpButton" Content="Sign Up" HorizontalAlignment="Center" Click="SignUpButton_Click" Margin="8,8,8,7"/>
+        <CheckBox x:Name="ClearAfterSignUpCB" Content="Clear form after sign up" Margin="8,8,8,8" IsChecked="True"/>
+        <Button x:Name="SignUpButton" Content="Sign Up" HorizontalAlignment="Center" Click="SignUpButton_Click" Margin="8,8,8,8"/>
     </StackPanel>
 </Window>
