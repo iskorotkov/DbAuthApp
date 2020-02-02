@@ -7,7 +7,7 @@ namespace DbAuthApp.Login
         public string RemoveWhitespaces(string login)
         {
             login = login.Trim();
-            login = Regex.Replace(login, @"\s+", " ");
+            login = Regex.Replace(login, @"\s{2,}", " ");
             return login;
         }
     }

@@ -21,8 +21,9 @@ namespace DbAuthApp.Login.Tests
         }
 
         [TestCase("user name", "user  name")]
-        [TestCase("user name", "user\tname")]
+        [TestCase("user\tname", "user\tname")]
         [TestCase("user name", "user\r\nname\n\n")]
+        [TestCase("us er na me", "us     er\r\nna\n\r\t\n me\n\n")]
         public void ReplaceWithSingleSpace(string expected, string login)
         {
             Assert.AreEqual(expected, new LoginProcessor().RemoveWhitespaces(login));
