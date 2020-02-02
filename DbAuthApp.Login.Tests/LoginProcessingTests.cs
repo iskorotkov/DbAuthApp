@@ -4,14 +4,14 @@ namespace DbAuthApp.Login.Tests
 {
     public class LoginProcessingTests
     {
-        [TestCase("username", "username")]
-        [TestCase("username123456", "username123456")]
-        [TestCase("user name", "user name")]
-        [TestCase("user name 20 20", "user name 20 20")]
+        [TestCase("username")]
+        [TestCase("username123456")]
+        [TestCase("user name")]
+        [TestCase("user name 20 20")]
 
-        public void NoChangeLogin(string expected, string login)
+        public void NoChangeLogin(string login)
         {
-            Assert.AreEqual(expected, new LoginProcessor().RemoveWhitespaces(login));
+            Assert.AreEqual(login, new LoginProcessor().RemoveWhitespaces(login));
         }
 
         [TestCase("user name", "\t\nuser name    ")]

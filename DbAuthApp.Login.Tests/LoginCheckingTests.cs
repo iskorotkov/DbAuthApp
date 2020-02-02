@@ -22,7 +22,7 @@ namespace DbAuthApp.Login.Tests
         [TestCase("user    name")]
         public void CorrectLoginsWithSpaces(string login)
         {
-            Assert.IsFalse(new LoginChecker().IsCorrect(login));
+            Assert.IsTrue(new LoginChecker().IsCorrect(login));
         }
 
         [TestCase("user\t\t\tname")]
@@ -32,7 +32,7 @@ namespace DbAuthApp.Login.Tests
         [TestCase("   user\tname\r\n")]
         public void CorrectLoginsWithAllWhitespaces(string login)
         {
-            Assert.IsFalse(new LoginChecker().IsCorrect(login));
+            Assert.IsTrue(new LoginChecker().IsCorrect(login));
         }
 
         [TestCase("\x00")]
