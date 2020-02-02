@@ -36,14 +36,15 @@ namespace DbAuthApp.Registration
         private void SignUpButton_Click(object sender, RoutedEventArgs e)
         {
             var login = RetrieveLogin();
-            var salt = _saltGenerator.Next();
-            var password = _hasher.Hash(RetrievePassword(), salt);
 
             string message;
             string caption;
             using (var connection = new NpgsqlConnection(BuildConnectionString()))
             {
                 connection.Open();
+
+                var salt = _saltGenerator.Next();
+                var password = _hasher.Hash(RetrievePassword(), salt);
                 var command = new AddUserCommand(connection, login, password, salt);
                 try
                 {
@@ -107,13 +108,13 @@ namespace DbAuthApp.Registration
             {
                 using var connection = new NpgsqlConnection(BuildConnectionString());
                 connection.Open();
-                if (new CountLoginCommand(connection, login).Execute() == 0)
+                if (new IsLoginPresentCommand(connection, login).Execute())
                 {
-                    _loginDecorator.InputIsCorrect();
+                    _loginDecorator.InputIsIncorrect("There is another user with the same login");
                 }
                 else
                 {
-                    _loginDecorator.InputIsIncorrect("There is another user with the same login");
+                    _loginDecorator.InputIsCorrect();
                 }
             }
             else

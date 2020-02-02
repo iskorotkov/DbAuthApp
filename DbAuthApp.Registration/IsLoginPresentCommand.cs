@@ -2,11 +2,11 @@
 
 namespace DbAuthApp.Registration
 {
-    public class CountLoginCommand
+    public class IsLoginPresentCommand
     {
         private readonly NpgsqlCommand _command;
 
-        public CountLoginCommand(NpgsqlConnection connection, string login)
+        public IsLoginPresentCommand(NpgsqlConnection connection, string login)
         {
             _command = new NpgsqlCommand
             {
@@ -19,6 +19,6 @@ namespace DbAuthApp.Registration
             _command.Parameters.AddWithValue("@login", login);
         }
 
-        public long Execute() => (long) _command.ExecuteScalar();
+        public bool Execute() => (long) _command.ExecuteScalar() > 0;
     }
 }
