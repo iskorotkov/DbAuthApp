@@ -7,10 +7,7 @@ using Npgsql;
 
 namespace DbAuthApp.Registration
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
-    public partial class MainWindow
+    public partial class RegistrationWindow
     {
         private readonly PasswordHasher _hasher = new PasswordHasher();
         private readonly LoginChecker _loginChecker = new LoginChecker();
@@ -20,7 +17,7 @@ namespace DbAuthApp.Registration
         private readonly TextBoxDecorator _passwordDecorator;
         private readonly SaltGenerator _saltGenerator = new SaltGenerator();
 
-        public MainWindow()
+        public RegistrationWindow()
         {
             InitializeComponent();
             _loginDecorator = new TextBoxDecorator(LoginBox);
