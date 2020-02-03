@@ -4,6 +4,9 @@
     <OutputType>WinExe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UseWPF>true</UseWPF>
+    <Authors>Ivan Korotkov</Authors>
+    <RepositoryUrl>https://github.com/iskorotkov/DbAuthApp</RepositoryUrl>
+    <Company>Ivan Korotkov</Company>
   </PropertyGroup>
 
   <ItemGroup>
@@ -11,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DbAuthApp.InputFieldDecoration\DbAuthApp.InputFieldDecoration.csproj" />
     <ProjectReference Include="..\DbAuthApp.Login\DbAuthApp.Login.csproj" />
     <ProjectReference Include="..\DbAuthApp.Passwords\DbAuthApp.Passwords.csproj" />
     <ProjectReference Include="..\DbAuthApp.Registration.Postgres\DbAuthApp.Registration.Postgres.csproj" />

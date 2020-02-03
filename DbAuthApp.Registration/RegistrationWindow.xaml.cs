@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows;
+using DbAuthApp.InputFieldDecoration;
 using DbAuthApp.Login;
 using DbAuthApp.Passwords;
 using DbAuthApp.Registration.Postgres;

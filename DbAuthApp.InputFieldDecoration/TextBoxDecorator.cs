@@ -1,7 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Media;
 
-namespace DbAuthApp.Registration
+namespace DbAuthApp.InputFieldDecoration
 {
     public class TextBoxDecorator
     {
