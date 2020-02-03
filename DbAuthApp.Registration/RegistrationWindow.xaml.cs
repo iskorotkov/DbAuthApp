@@ -3,6 +3,7 @@ using System.Linq;
 using System.Windows;
 using DbAuthApp.Login;
 using DbAuthApp.Passwords;
+using DbAuthApp.Registration.Postgres;
 using Npgsql;
 
 namespace DbAuthApp.Registration

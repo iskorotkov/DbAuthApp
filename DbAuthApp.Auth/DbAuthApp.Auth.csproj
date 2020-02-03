@@ -7,6 +7,7 @@
     </PropertyGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\DbAuthApp.Auth.Postgres\DbAuthApp.Auth.Postgres.csproj" />
       <ProjectReference Include="..\DbAuthApp.Login\DbAuthApp.Login.csproj" />
       <ProjectReference Include="..\DbAuthApp.Passwords\DbAuthApp.Passwords.csproj" />
     </ItemGroup>

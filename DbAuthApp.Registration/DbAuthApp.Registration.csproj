@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\DbAuthApp.Login\DbAuthApp.Login.csproj" />
     <ProjectReference Include="..\DbAuthApp.Passwords\DbAuthApp.Passwords.csproj" />
+    <ProjectReference Include="..\DbAuthApp.Registration.Postgres\DbAuthApp.Registration.Postgres.csproj" />
   </ItemGroup>
 
 </Project>

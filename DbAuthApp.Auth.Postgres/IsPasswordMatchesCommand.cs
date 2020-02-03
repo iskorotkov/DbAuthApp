@@ -1,6 +1,6 @@
 ﻿using Npgsql;
 
-namespace DbAuthApp.Auth
+namespace DbAuthApp.Auth.Postgres
 {
     public class IsPasswordMatchesCommand
     {

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using DbAuthApp.Auth.Postgres;
 using DbAuthApp.Login;
 using DbAuthApp.Passwords;
 using Npgsql;

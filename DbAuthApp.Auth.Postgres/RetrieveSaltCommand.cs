@@ -1,24 +1,23 @@
 ﻿using Npgsql;
 
-namespace DbAuthApp.Registration
+namespace DbAuthApp.Auth.Postgres
 {
-    public class IsLoginPresentCommand
+    public class RetrieveSaltCommand
     {
         private readonly NpgsqlCommand _command;
 
-        public IsLoginPresentCommand(NpgsqlConnection connection, string login)
+        public RetrieveSaltCommand(NpgsqlConnection connection, string login)
         {
             _command = new NpgsqlCommand
             {
                 Connection = connection,
-                CommandText = @"SELECT COUNT(*)
+                CommandText = @"SELECT users.salt
                                 FROM users
                                 WHERE users.login = @login"
             };
-
             _command.Parameters.AddWithValue("@login", login);
         }
 
-        public bool Execute() => (long) _command.ExecuteScalar() > 0;
+        public byte[] Execute() => (byte[]) _command.ExecuteScalar();
     }
 }

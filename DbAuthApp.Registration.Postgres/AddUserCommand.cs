@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using Npgsql;
 
-namespace DbAuthApp.Registration
+namespace DbAuthApp.Registration.Postgres
 {
     public class AddUserCommand
     {
