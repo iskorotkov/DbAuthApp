@@ -2,6 +2,9 @@
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <Authors>Ivan Korotkov</Authors>
+        <RepositoryUrl>https://github.com/iskorotkov/DbAuthApp</RepositoryUrl>
+        <Company>Ivan Korotkov</Company>
     </PropertyGroup>
 
     <ItemGroup>
