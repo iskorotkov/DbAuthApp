@@ -24,11 +24,11 @@ jobs:
     runs-on: windows-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Pack Nuget package
+      - name: Pack Nuget packages
         run: dotnet pack -c release
       - name: Setup Nuget
         uses: warrenbuckley/Setup-Nuget@v1
-      - name: Get dependencies
-        run: nuget sources add github https://nuget.pkg.github.com/iskorotkov/index.json -username iskorotkov -password ${{ secrets.GITHUB_TOKEN }}
+      - name: Add Github Packages registry to Nuget
+        run: nuget sources add -name github -source https://nuget.pkg.github.com/iskorotkov/index.json -username iskorotkov -password ${{ secrets.GITHUB_TOKEN }}
       - name: Push packages to Github Packages
         run: dotnet nuget push **/*.nupkg -s github --skip-duplicate
