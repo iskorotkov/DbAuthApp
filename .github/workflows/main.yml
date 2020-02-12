@@ -27,4 +27,4 @@ jobs:
       - name: Pack Nuget package
         run: dotnet pack -c release
       - name: Push packages to Github Packages
-        run: dotnet nuget push **/*.nupkg --username iskorotkov --password ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/iskorotkov/index.json
+        run: dotnet nuget push **/*.nupkg -k ${{ secrets.GITHUB_TOKEN }} -s https://nuget.pkg.github.com/iskorotkov/index.json
