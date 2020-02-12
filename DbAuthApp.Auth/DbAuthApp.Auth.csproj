@@ -4,6 +4,9 @@
         <OutputType>WinExe</OutputType>
         <TargetFramework>netcoreapp3.1</TargetFramework>
         <UseWPF>true</UseWPF>
+        <Authors>Ivan Korotkov</Authors>
+        <Company>Ivan Korotkov</Company>
+        <RepositoryUrl>https://github.com/iskorotkov/DbAuthApp</RepositoryUrl>
     </PropertyGroup>
 
     <ItemGroup>
