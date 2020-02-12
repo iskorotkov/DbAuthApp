@@ -1,0 +1,34 @@
+name: main
+on:
+  pull_request:
+    branches: 
+      - master
+  push:
+    branches: 
+      - master
+jobs:
+  build:
+    runs-on: windows-latest
+    steps:
+    - name: actions/checkout@v2 
+    - name: Setup .Net Core SDK
+      uses: actions/setup-dotnet@1.4.0
+      with:
+        dotnet-version: 3.1.200-preview-014883
+    - name: Setup Nuget
+      uses: warrenbuckley/Setup-Nuget@v1
+    - name: Get dependencies
+      run: nuget sources add -name github -source ${{ secrets.GITHUB_PACKAGES_URL }} -username ${{ secrets.PACKAGES_USERNAME }} -password ${{ secrets.PACKAGES_PASSWORD }}
+    - name: Build
+      run: dotnet build -c release
+    - name: Test
+      run: dotnet test
+  deploy:
+    needs: build
+    runs-on: windows-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Pack Nuget package
+        run: dotnet pack -c release
+      - name: Push packages to Github Packages
+        run: dotnet nuget push **/*.nupkg --api-key ${{ secrets.GITHUB_TOKEN }} --source https://nuget.pkg.github.com/iskorotkov/index.json
