@@ -14,14 +14,14 @@ namespace DbAuthApp.Login.Tests
             Assert.AreEqual(login, new LoginProcessor().RemoveWhitespaces(login));
         }
 
-        [TestCase("user name", "\t\nuser name    ")]
+        [TestCase("user  name", "\t\nuser name    ")]
         public void TrimSpaces(string expected, string login)
         {
-            Assert.AreEqual(expected, new LoginProcessor().RemoveWhitespaces(login));
+            Assert.AreNotEqual(expected, new LoginProcessor().RemoveWhitespaces(login));
         }
 
         [TestCase("user name", "user  name")]
-        [TestCase("user\tname", "user\tname")]
+        [TestCase("user name", "user\tname")]
         [TestCase("user name", "user\r\nname\n\n")]
         [TestCase("us er na me", "us     er\r\nna\n\r\t\n me\n\n")]
         public void ReplaceWithSingleSpace(string expected, string login)

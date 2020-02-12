@@ -5,6 +5,7 @@
         <Authors>Ivan Korotkov</Authors>
         <RepositoryUrl>https://github.com/iskorotkov/DbAuthApp</RepositoryUrl>
         <Company>Ivan Korotkov</Company>
+        <PackageVersion>1.0.1</PackageVersion>
     </PropertyGroup>
 
 </Project>
