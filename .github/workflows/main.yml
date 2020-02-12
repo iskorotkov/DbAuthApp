@@ -15,10 +15,6 @@ jobs:
       uses: actions/setup-dotnet@1.4.0
       with:
         dotnet-version: 3.1.200-preview-014883
-    - name: Setup Nuget
-      uses: warrenbuckley/Setup-Nuget@v1
-    - name: Get dependencies
-      run: nuget sources add -name github -source ${{ secrets.GITHUB_PACKAGES_URL }} -username ${{ secrets.PACKAGES_USERNAME }} -password ${{ secrets.PACKAGES_PASSWORD }}
     - name: Build
       run: dotnet build -c release
     - name: Test
