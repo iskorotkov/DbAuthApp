@@ -15,10 +15,8 @@ jobs:
       uses: actions/setup-dotnet@1.4.0
       with:
         dotnet-version: 3.1.200-preview-014883
-    - name: Restore
-      run: dotnet restore
     - name: Build
-      run: dotnet build -c release
+      run: dotnet msbuild
     - name: Test
       run: dotnet test
   deploy:
