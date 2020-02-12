@@ -19,7 +19,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAuthApp.Auth.Postgres", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAuthApp.Registration.Postgres", "DbAuthApp.Registration.Postgres\DbAuthApp.Registration.Postgres.csproj", "{84BABFF1-0699-43C2-B24E-70FFD899FCBE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAuthApp.InputFieldDecoration", "DbAuthApp.InputFieldDecoration\DbAuthApp.InputFieldDecoration.csproj", "{721AE7F5-88AF-4030-8E7C-2388BCD3CB44}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbAuthApp.InputFieldDecoration", "DbAuthApp.InputFieldDecoration\DbAuthApp.InputFieldDecoration.csproj", "{257FACC0-03CF-49B4-9494-C6AF86FE6AF6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,10 +59,10 @@ Global
 		{84BABFF1-0699-43C2-B24E-70FFD899FCBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{84BABFF1-0699-43C2-B24E-70FFD899FCBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{84BABFF1-0699-43C2-B24E-70FFD899FCBE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{721AE7F5-88AF-4030-8E7C-2388BCD3CB44}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{721AE7F5-88AF-4030-8E7C-2388BCD3CB44}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{721AE7F5-88AF-4030-8E7C-2388BCD3CB44}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{721AE7F5-88AF-4030-8E7C-2388BCD3CB44}.Release|Any CPU.Build.0 = Release|Any CPU
+		{257FACC0-03CF-49B4-9494-C6AF86FE6AF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{257FACC0-03CF-49B4-9494-C6AF86FE6AF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{257FACC0-03CF-49B4-9494-C6AF86FE6AF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{257FACC0-03CF-49B4-9494-C6AF86FE6AF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

@@ -1,19 +1,12 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
 
     <PropertyGroup>
         <TargetFramework>netcoreapp3.1</TargetFramework>
+        <UseWPF>true</UseWPF>
         <Authors>Ivan Korotkov</Authors>
         <RepositoryUrl>https://github.com/iskorotkov/DbAuthApp</RepositoryUrl>
         <Company>Ivan Korotkov</Company>
+        <PackageVersion>1.1.0</PackageVersion>
     </PropertyGroup>
-
-    <ItemGroup>
-      <Reference Include="PresentationCore, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-        <HintPath>..\..\..\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.1.0\ref\netcoreapp3.1\PresentationCore.dll</HintPath>
-      </Reference>
-      <Reference Include="PresentationFramework, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
-        <HintPath>..\..\..\Program Files\dotnet\packs\Microsoft.WindowsDesktop.App.Ref\3.1.0\ref\netcoreapp3.1\PresentationFramework.dll</HintPath>
-      </Reference>
-    </ItemGroup>
 
 </Project>
