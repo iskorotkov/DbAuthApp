@@ -12,7 +12,7 @@ namespace DbAuthApp.InputFieldDecoration
         private readonly Control _textBox;
         private bool _isCorrect;
 
-        public OnIsCorrectChangedDelegate OnIsCorrectChanged;
+        public OnIsCorrectChangedDelegate OnIsCorrectChanged { get; set; }
 
         public TextBoxDecorator(Control textBox)
         {
@@ -27,7 +27,7 @@ namespace DbAuthApp.InputFieldDecoration
             private set
             {
                 _isCorrect = value;
-                OnIsCorrectChanged.Invoke();
+                OnIsCorrectChanged?.Invoke();
             }
         }
 
