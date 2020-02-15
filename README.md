@@ -1,3 +1,3 @@
 # DbAuthApp
 
-![CI](https://github.com/iskorotkov/DbAuthApp/workflows/CI/badge.svg)
+![deploy](https://github.com/iskorotkov/DbAuthApp/workflows/deploy/badge.svg)
